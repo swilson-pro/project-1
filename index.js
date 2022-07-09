@@ -131,6 +131,8 @@ function renderData(data) {
     // console.log('fiveItems Array After For Loop: ', fiveItems);
     // console.log('fiveItems.length', fiveItems.length);
 
+    console.log('fiveItems? ', fiveItems);
+
     fiveItems.forEach(appendImages);
 
 }
@@ -142,12 +144,12 @@ function appendImages(arrayItem) {
     img.src = arrayItem.image_link;
     // console.log(img);
     // console.log(productMenu);
-    // img.details = arrayItem;
+    img.details = arrayItem;
     img.addEventListener('click', updateProductDetails);
     productMenu.append(img);
-
-
+}
     function updateProductDetails(event){
+        let arrayItem = event.target.details;
         // console.log('arrayItem.name', arrayItem.name);
         // console.log('event: ', event);
         // console.log('event.target: ', event.target);
@@ -168,10 +170,7 @@ function appendImages(arrayItem) {
 
 
 
-}
-
 productForm.addEventListener('submit', createItem);
-
 
 function createItem(event) {
     event.preventDefault();
@@ -183,15 +182,11 @@ function createItem(event) {
     const rating = document.querySelector('#new-rating').value;
     const description = document.querySelector('#new-des').value;
 
-
     const item = {name, price, image_link, rating, description}
 
-
     console.log('Item: ', item);
-
     
     appendImages(item);
-
 
 }
 
