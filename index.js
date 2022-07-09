@@ -94,9 +94,8 @@ const baseUrl = 'https://makeup-api.herokuapp.com/api/v1/products.json?'
 const mayBelline = 'brand=maybelline'
 const imageCountDefault = 5;
 const productMenu = document.querySelector('#product-menu');
-console.log(productMenu);
 const fiveItems = [];
-
+const productForm = document.querySelector('#new-product');
 
 // fetch Maybelline Data
 
@@ -105,47 +104,112 @@ fetch(baseUrl + mayBelline)
 .then(mayBellineData => renderData(mayBellineData))
 
 function renderData(data) {
-    console.log('typeof(data): ', typeof(data));
-    console.log('data: ', data);
-    console.log('data[28]: ', data[28])
-    console.log('data[28].name: ', data[28].name)
-    console.log('data.length: ', data.length)
+    // console.log('typeof(data): ', typeof(data));
+    // console.log('data: ', data);
+    // console.log('data[28]: ', data[28])
+    // console.log('data[28].name: ', data[28].name)
+    // console.log('data.length: ', data.length)
 
 // create new Array of 5 items to put the images into;
 
-    console.log('fiveItems Array: ', fiveItems);
-    console.log('typeof(fiveItems): ', typeof(fiveItems))
+    // console.log('fiveItems Array: ', fiveItems);
+    // console.log('typeof(fiveItems): ', typeof(fiveItems))
 
     for (let i = 0; i < 5; i++) {
-        console.log('i: ', i);
+        // console.log('i: ', i);
         let randNum = Math.floor(Math.random() * (data.length + 1));
-        console.log('randNum: ', randNum);
+        // console.log('randNum: ', randNum);
         let randItem = data[randNum];
-        console.log('randItem: ', randItem)
-        console.log('randItem.price: ', randItem.price);
+        // console.log('randItem: ', randItem)
+        // console.log('randItem.price: ', randItem.price);
         fiveItems.push(randItem);
-        console.log('fiveItems Array: ', fiveItems);
-        console.log('fiveItems.length', fiveItems.length);
+        // console.log('fiveItems Array: ', fiveItems);
+        // console.log('fiveItems.length', fiveItems.length);
 
     }
 
-    console.log('fiveItems Array After For Loop: ', fiveItems);
-    console.log('fiveItems.length', fiveItems.length);
+    // console.log('fiveItems Array After For Loop: ', fiveItems);
+    // console.log('fiveItems.length', fiveItems.length);
 
-
-    fiveItems.forEach(appendImage);
+    fiveItems.forEach(appendImages);
 
 }
 
-function appendImage(arrayItem) {
-    console.log('arrayItem: ', arrayItem);
-    console.log('arrayItem.id: ', arrayItem.id)
+function appendImages(arrayItem) {
+    // console.log('arrayItem: ', arrayItem);
+    // console.log('arrayItem.id: ', arrayItem.id)
     const img = document.createElement('img');
     img.src = arrayItem.image_link;
-    console.log(img);
-    console.log(productMenu);
+    // console.log(img);
+    // console.log(productMenu);
+    // img.details = arrayItem;
+    img.addEventListener('click', updateProductDetails);
     productMenu.append(img);
+
+
+    function updateProductDetails(event){
+        // console.log('arrayItem.name', arrayItem.name);
+        // console.log('event: ', event);
+        // console.log('event.target: ', event.target);
+        // console.log('event.target.details: ', event.target.details);
+        // console.log('arrayItem.name: ', arrayItem.name);
+        const name = document.querySelector('.name');
+        name.textContent = arrayItem.name;
+        // console.log(name);
+        const image = document.querySelector('.detail-image');
+        image.src = arrayItem.image_link;
+        const price = document.querySelector('.price');
+        price.textContent = "$" + arrayItem.price;
+        const rating = document.querySelector('#rating-display');
+        rating.textContent = arrayItem.rating;
+        const description = document.querySelector('#des-Display');
+        description.textContent = arrayItem.description;
+    }
+
+
+
 }
+
+productForm.addEventListener('submit', createItem);
+
+
+function createItem(event) {
+    event.preventDefault();
+    // console.log('test submission');
+    const name = document.querySelector('#new-name').value;
+    console.log(name);
+    const price = document.querySelector('#new-price').value;
+    const image_link = document.querySelector('#new-image').value;
+    const rating = document.querySelector('#new-rating').value;
+    const description = document.querySelector('#new-des').value;
+
+
+    const item = {name, price, image_link, rating, description}
+
+
+    console.log('Item: ', item);
+
+    
+    appendImages(item);
+
+
+}
+
+
+
+
+// function createItem(event) {
+//     event.preventDefault();
+//     const name = document.querySelector('#new-name').value;
+//     console.log(name.value);
+
+//     const arrayItem = {name};
+
+//     appendImages(arrayItem);
+// }
+
+
+
 
 
 
