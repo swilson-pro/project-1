@@ -188,6 +188,7 @@ productForm.addEventListener('submit', createItem);
 function createItem(event) {
     event.preventDefault();
     // console.log('test submission');
+    productForm.reset();
     const name = document.querySelector('#new-name').value;
     // console.log(name);
     const price = document.querySelector('#new-price').value;
@@ -196,6 +197,7 @@ function createItem(event) {
     const description = document.querySelector('#new-des').value;
 
     const item = {name, price, image_link, rating, description}
+    
 
     console.log('Item: ', item);
     
