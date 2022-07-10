@@ -137,6 +137,10 @@ function renderData(data) {
 
 }
 
+
+
+
+
 function appendImages(arrayItem) {
     // console.log('arrayItem: ', arrayItem);
     // console.log('arrayItem.id: ', arrayItem.id)
@@ -145,9 +149,20 @@ function appendImages(arrayItem) {
     // console.log(img);
     // console.log(productMenu);
     img.details = arrayItem;
+    const button = document.createElement('button');
+    // button.type = 'button';
+    button.innerHTML = 'X'
+    console.log(button);
     img.addEventListener('click', updateProductDetails);
+    button.addEventListener('click', () => {
+        button.remove();
+        img.remove();
+    });
     productMenu.append(img);
+    productMenu.append(button);
 }
+
+
     function updateProductDetails(event){
         let arrayItem = event.target.details;
         // console.log('arrayItem.name', arrayItem.name);
@@ -167,7 +182,7 @@ function appendImages(arrayItem) {
         const description = document.querySelector('#des-Display');
         description.textContent = arrayItem.description;
     }
-    
+
 productForm.addEventListener('submit', createItem);
 
 function createItem(event) {
