@@ -151,9 +151,9 @@ function appendImages(arrayItem) {
     function updateProductDetails(event){
         let arrayItem = event.target.details;
         // console.log('arrayItem.name', arrayItem.name);
-        // console.log('event: ', event);
-        // console.log('event.target: ', event.target);
-        // console.log('event.target.details: ', event.target.details);
+        console.log('event: ', event);
+        console.log('event.target: ', event.target);
+        console.log('event.target.details: ', event.target.details);
         // console.log('arrayItem.name: ', arrayItem.name);
         const name = document.querySelector('.name');
         name.textContent = arrayItem.name;
@@ -167,16 +167,14 @@ function appendImages(arrayItem) {
         const description = document.querySelector('#des-Display');
         description.textContent = arrayItem.description;
     }
-
-
-
+    
 productForm.addEventListener('submit', createItem);
 
 function createItem(event) {
     event.preventDefault();
     // console.log('test submission');
     const name = document.querySelector('#new-name').value;
-    console.log(name);
+    // console.log(name);
     const price = document.querySelector('#new-price').value;
     const image_link = document.querySelector('#new-image').value;
     const rating = document.querySelector('#new-rating').value;
